@@ -83,7 +83,23 @@ as the wkhtmltopdf will not be logged in and will be redirected most likely to a
   
   :layout => If you wish for rails to render your template in a layout specify the layout in this param
   :delete_generated_pdf => set this to true if you want to plugin to delete the generated pdf after it has been sent back to the user
-
+  :wkhtmltopdf_options => takes a hash of optional params for wkhtmltopdf, see the current accepted list below
+    
+    :print_media => true # sets the --print-media-type flag for wkhtmltopdf, 
+      this forces wkhtmltopdf to use the "print" media type instead of "screen", 
+      so if you need to load custom stylesheets be sure to include this, 
+      eg:
+        
+        render_to_pdf({
+          :pdf                   => "test_wkhtmltopdf", 
+          :file_path             => File.join(RAILS_ROOT, 'pdfs'), 
+          :template              => "/controller/action.html.erb",
+          :layout                => "application.html.erb",
+          :delete_generated_pdf  => true,
+          :wkhtmltopdf_options   => {
+            :print_media  => true
+          }
+        }) 
   
 
 TODO

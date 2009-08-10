@@ -25,7 +25,8 @@ module RenderPdf
   
   def make_pdf(options)
     if options.has_key?(:source)
-      system "wkhtmltopdf #{options[:source]} #{options[:file_path]}/#{options[:pdf]}.pdf"
+      pdf = Wkhtmltopdf.new(options)
+      pdf.generate
     else
       html_string = generate_html(options)
       timestamp = Time.now.strftime("%y%m%d%H%M%S")
@@ -34,7 +35,8 @@ module RenderPdf
       File.open(html_file_path, 'w') do |f|
         f.write(html_string)
       end
-      system "wkhtmltopdf #{html_file_path} #{options[:file_path]}/#{options[:pdf]}.pdf"
+      pdf = Wkhtmltopdf.new(options.merge({:html_file => html_file_path}))
+      pdf.generate
       File.delete(html_file_path) if File.exists?(html_file_path)
     end
   end

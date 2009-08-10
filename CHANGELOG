@@ -1,0 +1,12 @@
+wkhtmltopdf_on_rails CHANGELOG
+
+08/09/2009 - 10:00pm EST
+  * Added the CHANGELOG
+  * Added the Wkhtmltopdf class (generates the system call)
+  * Began support for optional wkhtmltopdf params
+    - added the :wkhtmltopdf_options element to the render_to_pdf options, accepts a hash
+    - 1st optional params is :print_media => true, (sets --print-media-type flag)
+
+08/09/2009 - 7:00pm EST
+  * Initial Commit
+
