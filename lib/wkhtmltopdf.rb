@@ -22,19 +22,21 @@ class Wkhtmltopdf
       wkhtml_call << "#{@html_file}"
     end
     wkhtml_call << " #{pdf_file} #{@params_string}"
-    puts "#{wkhtml_call}"
     system "#{wkhtml_call}"
   end
   
   private
   
   def create_params_string
-    @params_string = ""
-    unless @optional_params.blank?
-      if @optional_params.has_key?(:print_media) && @optional_params[:print_media]
-        @params_string << "--print-media-type"
+    params_arr = []
+    @optional_params.each do |key, val|
+      if val && val.is_a?(String)
+        params_arr << "--#{key.to_s} '#{val}'"
+      elsif val
+        params_arr << "--#{key.to_s}"
       end
     end
+    @params_string = params_arr.join(' ')
   end
   
 end

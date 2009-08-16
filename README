@@ -83,13 +83,24 @@ as the wkhtmltopdf will not be logged in and will be redirected most likely to a
   
   :layout => If you wish for rails to render your template in a layout specify the layout in this param
   :delete_generated_pdf => set this to true if you want to plugin to delete the generated pdf after it has been sent back to the user
-  :wkhtmltopdf_options => takes a hash of optional params for wkhtmltopdf, see the current accepted list below
+  :wkhtmltopdf_options => takes a hash of optional params for wkhtmltopdf
+    For these optional params, any optional flag for the wkhtmltopdf command line call is supported
+    To see a list of these run the command: 
     
-    :print_media => true # sets the --print-media-type flag for wkhtmltopdf, 
-      this forces wkhtmltopdf to use the "print" media type instead of "screen", 
-      so if you need to load custom stylesheets be sure to include this, 
-      eg:
-        
+    wkhtmltopdf --help
+    
+    For the list the name of the command is the key in the optional hash as a string, eg: "key-name", without the -- in front
+    The value is either true or a string.  If the option requires text to follow use the text you want as the value:
+    
+    Eg: --header-center <text>  would be:  "header-center" => "This is my header text"
+    
+    Note: You do not need to add the quotes to the value, the library will automatically quote the value (text) for the 
+    option when it passes it to the command line.
+    
+    If the command does not require text, eg: --print-media-type then use the following:  "print-media-type" => true
+    
+    See some more examples:
+    
         render_to_pdf({
           :pdf                   => "test_wkhtmltopdf", 
           :file_path             => File.join(RAILS_ROOT, 'pdfs'), 
@@ -97,16 +108,25 @@ as the wkhtmltopdf will not be logged in and will be redirected most likely to a
           :layout                => "application.html.erb",
           :delete_generated_pdf  => true,
           :wkhtmltopdf_options   => {
-            :print_media  => true
+            "print-media-type" => true
           }
         }) 
   
+        render_to_pdf({
+          :pdf       => "test_wkhtmltopdf", 
+          :file_path  => File.join(RAILS_ROOT, 'pdfs'), 
+          :source    => root_url,
+          :wkhtmltopdf_options => {
+            "footer-line" => true,
+            "footer-center" => "[page] / [toPage]"
+          }
+        })
 
+          
 TODO
 =======
 
-Add support for the optional wkhtmltopdf params
-  - see:  wkhtmltopdf --help
+* Automatically create the directory for the pdf's if the specified :file_path folder does not exist
 
 
 
