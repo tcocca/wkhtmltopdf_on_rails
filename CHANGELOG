@@ -1,5 +1,9 @@
 wkhtmltopdf_on_rails CHANGELOG
 
+10/06/2009 - 10:00pm EST
+  * DRY-ed up the code
+  * re-formatted the README to the textile format
+
 08/16/2009 - 5:00pm EST
   * Added support for all optional parameters for the wkhtmltopdf system call ( See: wkhtmltopdf --help for list of options)
 
