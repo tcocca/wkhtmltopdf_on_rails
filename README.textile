@@ -97,6 +97,8 @@ h6. Optional params:
 <pre>
   :layout => If you wish for rails to render your template in a layout specify the layout in this param
   :delete_generated_pdf => set this to true if you want to plugin to delete the generated pdf after it has been sent back to the user
+    *NOTE: this is slow because rails needs to read in the entire file before sending instead of sending as it reads, 
+        but this is the only way the delete the file in the same call as the send_file
   :wkhtmltopdf_options => takes a hash of optional params for wkhtmltopdf
 </pre>
 
