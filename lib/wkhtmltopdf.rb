@@ -12,7 +12,7 @@ class Wkhtmltopdf
   
   def generate
     wkhtml_call = "wkhtmltopdf "
-    if @source.present?
+    if !@source.nil?
       puts "source"
       wkhtml_call << "#{@source}"
     else
@@ -27,11 +27,13 @@ class Wkhtmltopdf
   
   def create_params_string
     params_arr = []
-    @optional_params.each do |key, val|
-      if val && val.is_a?(String)
-        params_arr << "--#{key.to_s} '#{val}'"
-      elsif val
-        params_arr << "--#{key.to_s}"
+    unless @optional_params.nil?
+      @optional_params.each do |key, val|
+        if val && val.is_a?(String)
+          params_arr << "--#{key.to_s} '#{val}'"
+        elsif val
+          params_arr << "--#{key.to_s}"
+        end
       end
     end
     @params_string = params_arr.join(' ')

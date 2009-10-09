@@ -1,5 +1,8 @@
 wkhtmltopdf_on_rails CHANGELOG
 
+10/08/2009 - 10:00pm EST
+  * Added test coverage for the Wkhtmltopdf class
+
 10/06/2009 - 10:00pm EST
   * DRY-ed up the code
   * re-formatted the README to the textile format

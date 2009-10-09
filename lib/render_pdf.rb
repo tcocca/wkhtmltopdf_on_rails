@@ -48,8 +48,8 @@ module RenderPdf
     html_string = render_to_string(render_options)
     
     # re-route absolute paths for images, scripts and stylesheets
-    html_string.gsub!( /src=["']+([^:]+?)["']/i ) { |m| "src=\"#{RAILS_ROOT}/public/" + $1 + '"' }
-    html_string.gsub!( /<link href=["']+([^:]+?)["']/i ) { |m| "<link href=\"#{RAILS_ROOT}/public/" + $1 + '"' }
+    html_string.gsub!( /src=["']+([^:]+?)["']/i ) { |m| "src=\"#{RAILS_ROOT}/public" + $1 + '"' }
+    html_string.gsub!( /<link href=["']+([^:]+?)["']/i ) { |m| "<link href=\"#{RAILS_ROOT}/public" + $1 + '"' }
     
     # Remove asset ids on images, scripts, and stylesheets with a regex
     html_string.gsub!( /src=["'](\S+\?\d*)["']/i ) { |m| 'src="' + $1.split('?').first + '"' }
