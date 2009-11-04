@@ -1,14 +1,9 @@
 require File.dirname(__FILE__) + '/test_helper'
+require File.dirname(__FILE__) + '/../lib/wkhtmltopdf'
 
 include WkhtmltopdfHelper
 
 class WkhtmltopdfTest < Test::Unit::TestCase
-  
-  #should_have_instance_method :pdf_file, :pdf_file=
-  #should_have_instance_method :html_file, :html_file=
-  #should_have_instance_method :source, :source=
-  #should_have_instance_method :optional_params, :optional_params=
-  #should_have_instance_method :params_string, :params_string=
   
   context "new wkhtmltopdf with a source url" do
     setup do
@@ -122,7 +117,7 @@ class WkhtmltopdfTest < Test::Unit::TestCase
     end
     
     
-    context "with symbol keys for optional params" do
+    context "with false values for optional params" do
       setup do
         @options = valid_pdf_source_attributes
         @optional_params = {
